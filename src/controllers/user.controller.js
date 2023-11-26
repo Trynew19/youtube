@@ -11,7 +11,7 @@ const registerUser = asyncHandler(async (req,res)=>{
     //     message:"ok guys and gand marao "
     // })
     const{fullName,email,username,password} = req.body
-    console.log("email:",email);
+    // console.log("email:",email);
     //cheak kare ki koi front end se data khali to nhi aa rha hai
 
     if([fullName,email,username,password].some((field) => field?.trim() === "")){
@@ -19,7 +19,7 @@ const registerUser = asyncHandler(async (req,res)=>{
     }
     //check user allready is availble then throw error
     
-   const existedUser =  User.findOne({
+   const existedUser = await  User.findOne({
         $or:[{username},{email}]
     })
     if(existedUser){
